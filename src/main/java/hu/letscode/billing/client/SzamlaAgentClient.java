@@ -1,14 +1,12 @@
 package hu.letscode.billing.client;
 
-import java.io.IOException;
-import java.io.InputStream;
-
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.CloseableHttpClient;
-
 import hu.letscode.billing.client.factory.HttpClientFactory;
 import hu.letscode.billing.client.factory.HttpPostFactory;
+import org.apache.hc.client5.http.classic.methods.HttpPost;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * The client to send requests toward the szamla agent.
@@ -38,12 +36,11 @@ public class SzamlaAgentClient {
      * @param xmlContent the content of the request body.
      * @return {@link InputStream}
      */
-    public InputStream execute(XmlField field, byte[] xmlContent) {
+    public String execute(XmlField field, byte[] xmlContent) {
         CloseableHttpClient httpClient = httpClientFactory.create();
         HttpPost httpPost = httpPostFactory.createWithEntity(apiUrl, field.getName(), xmlContent);
         try {
-            CloseableHttpResponse response = httpClient.execute(httpPost);
-            return response.getEntity().getContent();
+            return httpClient.execute(httpPost, response -> new String(response.getEntity().getContent().readAllBytes()));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

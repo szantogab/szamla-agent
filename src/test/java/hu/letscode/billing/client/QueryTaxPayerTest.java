@@ -1,36 +1,29 @@
 package hu.letscode.billing.client;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.math.BigDecimal;
-import java.time.LocalDate;
-
-import javax.xml.bind.JAXBException;
-import javax.xml.stream.XMLStreamException;
-
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
 import com.google.common.io.ByteStreams;
-
+import hu.letscode.billing.client.factory.HttpPostFactory;
+import hu.letscode.billing.client.factory.TrustAllHttpClientFactory;
+import hu.letscode.billing.domain.BillRevokeRequest;
+import hu.letscode.billing.domain.BillRevokeRequest.RevokeHeader;
+import hu.letscode.billing.domain.BillRevokeRequest.RevokeHeader.Template;
+import hu.letscode.billing.domain.BillingRevokeResponse;
 import hu.letscode.billing.service.factory.BillingServiceFactory;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import hu.letscode.billing.client.factory.HttpPostFactory;
-import hu.letscode.billing.client.factory.TrustAllHttpClientFactory;
-import hu.letscode.billing.domain.BillRevokeRequest;
-import hu.letscode.billing.domain.BillingRevokeResponse;
-import hu.letscode.billing.domain.BillRevokeRequest.RevokeHeader;
-import hu.letscode.billing.domain.BillRevokeRequest.RevokeHeader.Template;
+import java.io.IOException;
+import java.io.InputStream;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static com.github.tomakehurst.wiremock.client.WireMock.equalToXml;
 import static org.junit.Assert.*;
 
-public class RevokeBillTest {
+public class QueryTaxPayerTest {
 
     private SzamlaAgentClient underTest;
     private XmlMapper xmlMapper;
@@ -48,7 +41,7 @@ public class RevokeBillTest {
     @Test
     public void itShouldSerializeRequestAccordingToScheme() throws IOException {
         // GIVEN
-        stubBillingResponse("mock/response/create_bill_failure.xml");
+        stubBillingResponse("mock/response/query_taxpayer_success.xml");
         byte[] content = xmlMapper.writeValueAsBytes(createBillingRequest());
         // WHEN
         underTest.execute(XmlField.STORNO_BILL, content);

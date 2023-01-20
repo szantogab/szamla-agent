@@ -1,7 +1,8 @@
 package hu.letscode.billing.client.factory;
 
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
+
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.client5.http.impl.classic.HttpClients;
 
 /**
  * Created by tacsiazuma on 2017.05.14..

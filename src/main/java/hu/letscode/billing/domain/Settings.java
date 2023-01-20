@@ -63,4 +63,32 @@ public class Settings {
         this.agentKey = agentKey;
         return this;
     }
+
+    public String getUser() {
+        return user;
+    }
+
+    public String getAgentKey() {
+        return agentKey;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public boolean isElectricBill() {
+        return electricBill;
+    }
+
+    public String getKeyChainPassword() {
+        return keyChainPassword;
+    }
+
+    public boolean isDownloadBill() {
+        return downloadBill;
+    }
+
+    public int getAnswerType() {
+        return answerType;
+    }
 }

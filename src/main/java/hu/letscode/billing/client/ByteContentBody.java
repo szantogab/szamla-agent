@@ -1,9 +1,9 @@
 package hu.letscode.billing.client;
 
+import org.apache.hc.client5.http.entity.mime.ContentBody;
+
 import java.io.IOException;
 import java.io.OutputStream;
-
-import org.apache.http.entity.mime.content.ContentBody;
 
 /**
  * Content body implementation to imitate a file upload's content.

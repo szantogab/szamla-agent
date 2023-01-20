@@ -1,12 +1,12 @@
 package hu.letscode.billing.domain.factory;
 
-import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.Map;
-
 import hu.letscode.billing.domain.Item;
 import hu.letscode.billing.domain.RawItem;
 import hu.letscode.billing.domain.TaxCode;
+
+import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A factory to create {@link Item}'s from {@link RawItem}'s.

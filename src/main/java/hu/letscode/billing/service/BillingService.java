@@ -1,9 +1,6 @@
 package hu.letscode.billing.service;
 
-import hu.letscode.billing.domain.BillingRequest;
-import hu.letscode.billing.domain.BillRevokeRequest;
-import hu.letscode.billing.domain.BillingCreateResponse;
-import hu.letscode.billing.domain.BillingRevokeResponse;
+import hu.letscode.billing.domain.*;
 
 /**
  * Created by tacsiazuma on 2017.03.11..
@@ -33,9 +30,14 @@ public interface BillingService {
 
     /**
      * Retrieves a PDF version of an invoice.
-     * @param billingRequest the billing request.
+     * @param pdfRequest the PDF request.
      * @return if successful.
      */
-    boolean retreivePdf(BillingRequest billingRequest);
+    BillingCreateResponse retrievePdf(PdfRequest pdfRequest);
 
+    /**
+     * Returns the address details of a taxpayer.
+     * @return if successful.
+     */
+    QueryTaxPayerResponse queryTaxPayer(QueryTaxPayerRequest request);
 }

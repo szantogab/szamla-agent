@@ -89,7 +89,7 @@ public class CreateBillTest {
         stubBillingResponse("mock/response/create_bill_failure.xml");
         byte[] content = xmlMapper.writeValueAsBytes(createBillingRequest());
         // WHEN
-        InputStream actual = underTest.execute(XmlField.CREATE_BILL, content);
+        String actual = underTest.execute(XmlField.CREATE_BILL, content);
         // THEN
         BillingCreateResponse response = xmlMapper.readValue(actual, BillingCreateResponse.class);
         assertEquals(false, response.isSuccess());
@@ -104,7 +104,7 @@ public class CreateBillTest {
         stubBillingResponse("mock/response/create_bill_success.xml");
         byte[] content = xmlMapper.writeValueAsBytes(createBillingRequest());
         // WHEN
-        InputStream actual = underTest.execute(XmlField.CREATE_BILL, content);
+        String actual = underTest.execute(XmlField.CREATE_BILL, content);
         // THEN
         BillingCreateResponse response = xmlMapper.readValue(actual, BillingCreateResponse.class);
         assertEquals(true, response.isSuccess());
@@ -112,7 +112,7 @@ public class CreateBillTest {
         assertEquals(BigDecimal.valueOf(30000), response.getBillNetValue());
         assertEquals(BigDecimal.valueOf(38100), response.getBillGrossValue());
         assertEquals(BigDecimal.valueOf(38100), response.getReceivable());
-        assertEquals("content", response.getPdfContent());
+        assertEquals("content", response.getPdfContentBase64());
         assertEquals("someurl", response.getUrlForBuyer());
     }
 

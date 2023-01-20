@@ -1,9 +1,9 @@
 package hu.letscode.billing.domain;
 
-import java.math.BigDecimal;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+
+import java.math.BigDecimal;
 
 /**
  * The API response.
@@ -20,7 +20,7 @@ public class BillingCreateResponse {
     @JacksonXmlProperty(localName = "szamlabrutto")
     private BigDecimal billGrossValue;
     @JacksonXmlProperty(localName = "pdf")
-    private String pdfContent;
+    private String pdfContentBase64;
     @JacksonXmlProperty(localName = "hibakod")
     private String errorCode;
     @JacksonXmlProperty(localName = "hibauzenet")
@@ -63,12 +63,12 @@ public class BillingCreateResponse {
         this.billGrossValue = billGrossValue;
     }
 
-    public String getPdfContent() {
-        return pdfContent;
+    public String getPdfContentBase64() {
+        return pdfContentBase64;
     }
 
-    public void setPdfContent(String pdfContent) {
-        this.pdfContent = pdfContent;
+    public void setPdfContentBase64(String pdfContent) {
+        this.pdfContentBase64 = pdfContent;
     }
 
     public String getErrorCode() {

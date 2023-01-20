@@ -55,6 +55,12 @@ public class Header {
     @JacksonXmlProperty(localName = "fizetve")
     private boolean paidAlready;
 
+    @JacksonXmlProperty(localName = "elonezetpdf")
+    private boolean pdfPreview;
+
+    @JacksonXmlProperty(localName = "elolegSzamlaszam")
+    private String downPaymentInvoiceNo;
+
     public Header setLeavenedDate(LocalDateTime leavenedDate) {
         this.leavenedDate = leavenedDate.toLocalDate();
         return this;
@@ -140,5 +146,13 @@ public class Header {
         return this;
     }
 
+    public Header setDownPaymentInvoiceNo(String downPaymentInvoiceNo) {
+        this.downPaymentInvoiceNo = downPaymentInvoiceNo;
+        return this;
+    }
 
+    public Header setPdfPreview(boolean pdfPreview) {
+        this.pdfPreview = pdfPreview;
+        return this;
+    }
 }

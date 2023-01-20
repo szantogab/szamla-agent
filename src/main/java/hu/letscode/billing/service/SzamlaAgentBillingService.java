@@ -3,11 +3,11 @@ package hu.letscode.billing.service;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import hu.letscode.billing.client.SzamlaAgentClient;
 import hu.letscode.billing.client.XmlField;
-import hu.letscode.billing.domain.*; // NOPMD
+import hu.letscode.billing.domain.*;
 
 /**
  * The concrete billing service. Clients should use this class only.
- * 
+ *
  * @author tacsiazuma
  */
 public class SzamlaAgentBillingService implements BillingService {
@@ -17,7 +17,7 @@ public class SzamlaAgentBillingService implements BillingService {
 
     /**
      * Constructor.
-     * 
+     *
      * @param szamlaAgentClient the client
      * @param xmlMapper         the xml mapper
      */
@@ -30,8 +30,7 @@ public class SzamlaAgentBillingService implements BillingService {
     public BillingCreateResponse createBill(final BillingRequest billingRequest) {
         try {
             final byte[] content = xmlMapper.writeValueAsBytes(billingRequest);
-            return xmlMapper.readValue(szamlaAgentClient.execute(XmlField.CREATE_BILL, content),
-                    BillingCreateResponse.class);
+            return xmlMapper.readValue(szamlaAgentClient.execute(XmlField.CREATE_BILL, content), BillingCreateResponse.class);
         } catch (final Exception e) {
             throw new RuntimeException(e);
         }
@@ -54,7 +53,23 @@ public class SzamlaAgentBillingService implements BillingService {
     }
 
     @Override
-    public boolean retreivePdf(final BillingRequest billingRequest) {
-        return false;
+    public BillingCreateResponse retrievePdf(final PdfRequest pdfRequest) {
+        try {
+            final byte[] content = xmlMapper.writeValueAsBytes(pdfRequest);
+            return xmlMapper.readValue(szamlaAgentClient.execute(XmlField.PDF_QUERY, content),
+                    BillingCreateResponse.class);
+        } catch (final Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public QueryTaxPayerResponse queryTaxPayer(QueryTaxPayerRequest request) {
+        try {
+            final byte[] content = xmlMapper.writeValueAsBytes(request);
+            return xmlMapper.readValue(szamlaAgentClient.execute(XmlField.QUERY_TAXPAYER, content), QueryTaxPayerResponse.class);
+        } catch (final Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

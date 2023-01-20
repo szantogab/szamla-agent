@@ -1,13 +1,9 @@
 package hu.letscode.billing.domain.factory;
 
+import hu.letscode.billing.domain.*;
+
 import java.util.List;
 import java.util.stream.Collectors;
-
-import hu.letscode.billing.domain.BillingRequest;
-import hu.letscode.billing.domain.Buyer;
-import hu.letscode.billing.domain.Header;
-import hu.letscode.billing.domain.Item;
-import hu.letscode.billing.domain.RawItem;
 
 /**
  * Factory to create {@link BillingRequest}'s.

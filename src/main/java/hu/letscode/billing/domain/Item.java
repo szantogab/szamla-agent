@@ -1,13 +1,11 @@
 package hu.letscode.billing.domain;
 
-import java.math.BigDecimal;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import hu.letscode.billing.domain.serializer.TaxCodeSerializer;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
-import hu.letscode.billing.domain.serializer.TaxCodeSerializer;
+import java.math.BigDecimal;
 
 /**
  * An item on the bills' itemlist.
