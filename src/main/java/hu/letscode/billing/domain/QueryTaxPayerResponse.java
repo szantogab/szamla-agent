@@ -11,23 +11,11 @@ import java.util.ArrayList;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class QueryTaxPayerResponse {
-
-    @JacksonXmlProperty(localName = "sikeres")
-    private boolean success;
-
     @JacksonXmlProperty(localName = "taxpayerValidity")
     private boolean validity;
 
-    @JacksonXmlProperty(localName = "taxPayerData")
+    @JacksonXmlProperty(localName = "taxpayerData")
     private TaxPayerData taxPayerData;
-
-    public boolean isSuccess() {
-        return success;
-    }
-
-    public void setSuccess(boolean success) {
-        this.success = success;
-    }
 
     public boolean isValidity() {
         return validity;
@@ -45,26 +33,72 @@ public class QueryTaxPayerResponse {
         this.taxPayerData = taxPayerData;
     }
 
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class TaxPayerData {
         @JacksonXmlProperty(localName = "taxpayerName")
-        private String taxpayerName;
+        private String name;
+
+        @JacksonXmlProperty(localName = "taxpayerShortName")
+        private String shortName;
 
         @JacksonXmlProperty(localName = "taxNumberDetail")
         private TaxNumberDetail taxNumberDetail;
 
-        @JacksonXmlProperty(localName = "taxPayerAddressList")
+        @JacksonXmlProperty(localName = "incorporation")
+        private String incorporation;
+
+        @JacksonXmlProperty(localName = "taxpayerAddressList")
         private ArrayList<TaxPayerAddressItem> taxPayerAddresses;
 
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getShortName() {
+            return shortName;
+        }
+
+        public void setShortName(String shortName) {
+            this.shortName = shortName;
+        }
+
+        public TaxNumberDetail getTaxNumberDetail() {
+            return taxNumberDetail;
+        }
+
+        public void setTaxNumberDetail(TaxNumberDetail taxNumberDetail) {
+            this.taxNumberDetail = taxNumberDetail;
+        }
+
+        public ArrayList<TaxPayerAddressItem> getTaxPayerAddresses() {
+            return taxPayerAddresses;
+        }
+
+        public void setTaxPayerAddresses(ArrayList<TaxPayerAddressItem> taxPayerAddresses) {
+            this.taxPayerAddresses = taxPayerAddresses;
+        }
+
+        @JsonIgnoreProperties(ignoreUnknown = true)
         public static class TaxNumberDetail {
-            private String taxpayerId;
+            @JacksonXmlProperty(localName = "taxpayerId")
+            private String taxPayerId;
+
+            @JacksonXmlProperty(localName = "vatCode")
             private String vatCode;
 
-            public String getTaxpayerId() {
-                return taxpayerId;
+            @JacksonXmlProperty(localName = "countyCode")
+            private String countyCode;
+
+            public String getTaxPayerId() {
+                return taxPayerId;
             }
 
-            public void setTaxpayerId(String taxpayerId) {
-                this.taxpayerId = taxpayerId;
+            public void setTaxPayerId(String taxPayerId) {
+                this.taxPayerId = taxPayerId;
             }
 
             public String getVatCode() {
@@ -74,14 +108,23 @@ public class QueryTaxPayerResponse {
             public void setVatCode(String vatCode) {
                 this.vatCode = vatCode;
             }
-        }
 
+            public String getCountyCode() {
+                return countyCode;
+            }
+
+            public void setCountyCode(String countyCode) {
+                this.countyCode = countyCode;
+            }
+        }
+        @JsonIgnoreProperties(ignoreUnknown = true)
         public static class TaxPayerAddressItem {
             @JacksonXmlProperty(localName = "taxpayerAddressType")
             private String addressType;
             @JacksonXmlProperty(localName = "taxpayerAddress")
             private TaxpayerAddress address;
 
+            @JsonIgnoreProperties(ignoreUnknown = true)
             public static class TaxpayerAddress {
                 @JacksonXmlProperty(localName = "countryCode")
                 private String countryCode;

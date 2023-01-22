@@ -4,26 +4,44 @@ plugins {
 }
 
 group = 'hu.letscode'
-version = '0.4.3-SNAPSHOT'
+version = '0.5.2-SNAPSHOT'
 
 repositories {
     mavenCentral()
 }
 
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allJava
+    classifier = 'sources'
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
 publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-        }
-    }
     repositories {
         maven {
-            url = 'https://oss.sonatype.org/content/repositories/snapshots'
-        }
-        maven {
-            url = 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/szantogab/szamla-agent")
+            credentials {
+                username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
+                password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
+            }
         }
     }
+    publications {
+        gpr(MavenPublication) {
+            groupId = project.group.toString()
+            artifactId = project.name
+            version = project.version.toString()
+
+            from(components.java)
+            artifact(sourcesJar)
+        }
+    }
+
 }
 
 dependencies {
@@ -37,16 +55,3 @@ dependencies {
     testImplementation("org.mockito:mockito-core:1.10.19")
     testImplementation("com.github.tomakehurst:wiremock:2.27.2")
 }
-
-task sourcesJar(type: Jar) {
-    from sourceSets.main.allJava
-    classifier = 'sources'
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
-}
-
-publishing.publications.mavenJava.artifact(sourcesJar)
-publishing.publications.mavenJava.artifact(javadocJar)

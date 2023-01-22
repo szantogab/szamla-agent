@@ -37,11 +37,11 @@ public class SzamlaAgentClient {
      * @return {@link InputStream}
      */
     public String execute(XmlField field, byte[] xmlContent) {
-        CloseableHttpClient httpClient = httpClientFactory.create();
-        HttpPost httpPost = httpPostFactory.createWithEntity(apiUrl, field.getName(), xmlContent);
         try {
+            CloseableHttpClient httpClient = httpClientFactory.create();
+            HttpPost httpPost = httpPostFactory.createWithEntity(apiUrl, field.getName(), xmlContent);
             return httpClient.execute(httpPost, response -> new String(response.getEntity().getContent().readAllBytes()));
-        } catch (IOException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }

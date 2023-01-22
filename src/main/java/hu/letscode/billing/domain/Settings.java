@@ -17,78 +17,71 @@ public class Settings {
     @XmlElement(name = "jelszo", required = false)
     private String password;
 
-    @XmlElement(name = "eszamla", required = true)
-    private boolean electricBill;
+    @XmlElement(name = "eszamla", required = false)
+    private Boolean electricBill;
 
-    @XmlElement(name = "kulcstartojelszo", required = true)
+    @XmlElement(name = "kulcstartojelszo", required = false)
     private String keyChainPassword;
 
-    @XmlElement(name = "szamlaLetoltes", required = true)
-    private boolean downloadBill;
+    @XmlElement(name = "szamlaLetoltes", required = false)
+    private Boolean downloadBill;
 
-    @XmlElement(name = "valaszVerzio", required = true)
-    private int answerType;
-
-    public Settings setUser(String user) {
-        this.user = user;
-        return this;
-    }
-
-    public Settings setPassword(String password) {
-        this.password = password;
-        return this;
-    }
-
-    public Settings seteBill(boolean electricBill) {
-        this.electricBill = electricBill;
-        return this;
-    }
-
-    public Settings setKeyChainPassword(String keyChainPassword) {
-        this.keyChainPassword = keyChainPassword;
-        return this;
-    }
-
-    public Settings setDownloadBill(boolean downloadBill) {
-        this.downloadBill = downloadBill;
-        return this;
-    }
-
-    public Settings setAnswerType(int answerType) {
-        this.answerType = answerType;
-        return this;
-    }
-
-    public Settings setAgentKey(String agentKey) {
-        this.agentKey = agentKey;
-        return this;
-    }
+    @XmlElement(name = "valaszVerzio", required = false)
+    private Integer answerType;
 
     public String getUser() {
         return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
     }
 
     public String getAgentKey() {
         return agentKey;
     }
 
+    public void setAgentKey(String agentKey) {
+        this.agentKey = agentKey;
+    }
+
     public String getPassword() {
         return password;
     }
 
-    public boolean isElectricBill() {
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Boolean getElectricBill() {
         return electricBill;
+    }
+
+    public void setElectricBill(Boolean electricBill) {
+        this.electricBill = electricBill;
     }
 
     public String getKeyChainPassword() {
         return keyChainPassword;
     }
 
-    public boolean isDownloadBill() {
+    public void setKeyChainPassword(String keyChainPassword) {
+        this.keyChainPassword = keyChainPassword;
+    }
+
+    public Boolean getDownloadBill() {
         return downloadBill;
     }
 
-    public int getAnswerType() {
+    public void setDownloadBill(Boolean downloadBill) {
+        this.downloadBill = downloadBill;
+    }
+
+    public Integer getAnswerType() {
         return answerType;
+    }
+
+    public void setAnswerType(Integer answerType) {
+        this.answerType = answerType;
     }
 }
